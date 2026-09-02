@@ -12,6 +12,15 @@ CLIP-VSTD package automatically, so no external CLIP source path is required.
 cd ADAR_Research
 ```
 
+Generate the main VSTD split before training:
+
+```bash
+python scripts/generate_vstd.py \
+  --config configs/vstd_decoy_trainhard.yaml \
+  --output_root datasets \
+  --overwrite
+```
+
 All main experiments use:
 
 ```text

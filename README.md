@@ -48,6 +48,86 @@ Pillow, PyYAML, NumPy, and the CLIP runtime dependencies installed:
 python scripts/<script>.py
 ```
 
+## Reproducing the Main Experiments
+
+The thesis mainline uses the `vstd_decoy_trainhard` split: training samples are
+shorter and less cluttered, while validation and test samples contain longer
+paths and heavier decoys. From a fresh checkout, run the following commands from
+the repository root.
+
+### 1. Generate VSTD
+
+```bash
+python scripts/generate_vstd.py \
+  --config configs/vstd_decoy_trainhard.yaml \
+  --output_root datasets \
+  --overwrite
+```
+
+This creates:
+
+```text
+datasets/vstd_decoy_trainhard/
+  train/
+  val/
+  test/
+  classes.json
+  metadata.jsonl
+  dataset_config.yaml
+```
+
+### 2. Run the Main ViT Baseline
+
+```bash
+python scripts/train_vstd_clip_alignment.py \
+  --dataset_dir datasets/vstd_decoy_trainhard \
+  --output_dir runs/vit_b16_clip_fullft_vstd_decoy_trainhard_6e_b16_lr1e-5_seed123 \
+  --encoder vit --clip_model ViT-B/16 --train_scope full \
+  --epochs 6 --batch_size 16 --eval_batch_size 64 \
+  --lr 1e-5 --weight_decay 1e-4 \
+  --seed 123 --device cuda
+```
+
+### 3. Run ADAR
+
+```bash
+python scripts/train_vstd_clip_alignment.py \
+  --dataset_dir datasets/vstd_decoy_trainhard \
+  --output_dir runs/vit_adaptive_decoy_aware_fullft_vstd_decoy_trainhard_6e_b16_lr1e-5_seed123 \
+  --encoder vit --clip_model ViT-B/16 --train_scope full \
+  --epochs 6 --batch_size 16 --eval_batch_size 64 \
+  --lr 1e-5 --weight_decay 1e-4 \
+  --vit_path_adapter adaptive_decoy_aware \
+  --seed 123 --device cuda
+```
+
+### 4. Analyze by Path Geometry
+
+```bash
+python scripts/analyze_vstd_run.py \
+  --run_dir runs/vit_adaptive_decoy_aware_fullft_vstd_decoy_trainhard_6e_b16_lr1e-5_seed123 \
+  --dataset_dir datasets/vstd_decoy_trainhard \
+  --split test \
+  --output runs/vit_adaptive_decoy_aware_fullft_vstd_decoy_trainhard_6e_b16_lr1e-5_seed123/test_geometry_analysis.json \
+  --device cuda
+```
+
+### 5. Generate Gate Heatmaps
+
+```bash
+python scripts/visualize_vit_readout_gates.py \
+  --run_dir runs/vit_adaptive_decoy_aware_fullft_vstd_decoy_trainhard_6e_b16_lr1e-5_seed123 \
+  --dataset_dir datasets/vstd_decoy_trainhard \
+  --output_dir docs/figures/adar_gate_examples \
+  --num_samples 12 --min_path_length 48 \
+  --select_by path_enrichment --correct_only \
+  --device cuda
+```
+
+For the full three-seed protocol, CLIP ResNet baselines, Vim baseline, and
+ablation variants, see `docs/reproducibility/MAIN_EXPERIMENTS.md`. The
+paper-ready numbers are summarized in `docs/paper_tables/MAIN_RESULTS.md`.
+
 ## Local Checkpoints
 
 The Vim baseline checkpoint used in the thesis is expected at:

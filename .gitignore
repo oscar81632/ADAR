@@ -1,0 +1,30 @@
+# Generated datasets and experiment outputs
+datasets/
+runs/
+figures/
+external_datasets/
+notebooks/.ipynb_checkpoints/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Large model artifacts
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+
+# Logs and temporary files
+*.log
+*.tmp
+.DS_Store
+
+# Local/editor state
+.vscode/
+
+# Local agent/tool metadata
+.codex/
+.agents/

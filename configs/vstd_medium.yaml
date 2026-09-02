@@ -1,0 +1,34 @@
+dataset_name: vstd_medium
+seed: 202
+
+image:
+  size: 224
+  grid_size: 14
+  background: [248, 248, 246]
+  line_width: 3
+
+classes:
+  colors:
+    red: [220, 62, 62]
+    blue: [54, 105, 210]
+    green: [56, 155, 92]
+    yellow: [226, 178, 54]
+  shapes:
+    - circle
+    - square
+
+splits:
+  train: 10000
+  val: 2000
+  test: 3000
+
+factors:
+  path_lengths: [12, 16, 20, 24]
+  distractor_ratios: [0.15, 0.25, 0.4]
+
+generation:
+  min_turns: 3
+  max_attempts_per_sample: 500
+  draw_path_trace: false
+  start_marker: cell_outline
+  distractor_shapes: true

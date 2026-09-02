@@ -1,0 +1,215 @@
+{
+  "run_dir": "runs/vit_adaptive_decoy_aware_fullft_vstd_decoy_fullgrid_test_6e_b16_lr1e-5_seed123",
+  "dataset_dir": "datasets/vstd_decoy_fullgrid_test",
+  "split": "test",
+  "n": 3000,
+  "accuracy": 0.6523333333333333,
+  "corr_with_correct": {
+    "alpha": 0.02448417771884257,
+    "gate_mean": 0.0005695296995819998,
+    "gate_std": 0.031259498491570926,
+    "path_gate_mean": -0.03264274899830723,
+    "nonpath_gate_mean": 0.007812013786553155,
+    "path_enrichment": -0.05182248567053319,
+    "endpoint_gate": 0.13798202285883923,
+    "decoy_gate_mean": 0.012120371069318507,
+    "black_decoy_gate_mean": 0.0058580822732685126,
+    "gray_decoy_gate_mean": 0.02053877623600907
+  },
+  "corr_with_metadata": {
+    "alpha": {
+      "path_length": 0.018895573454992636,
+      "distractor_ratio": null,
+      "decoy_arrow_count": -0.0063484348635039715,
+      "start_end_manhattan": -0.008775460364734216,
+      "num_turns": 0.013093255987838892,
+      "path_bbox_area": -0.01011013749813075,
+      "path_coverage": 0.018895573454993046,
+      "long_dependency_score": -0.0038050584887491263
+    },
+    "gate_mean": {
+      "path_length": -0.1313072034677461,
+      "distractor_ratio": null,
+      "decoy_arrow_count": -0.04034232262211592,
+      "start_end_manhattan": -0.03809586825974537,
+      "num_turns": -0.10609278099852319,
+      "path_bbox_area": -0.09047317260371435,
+      "path_coverage": -0.13130720346774816,
+      "long_dependency_score": -0.09166035859763132
+    },
+    "gate_std": {
+      "path_length": 0.09185308974663195,
+      "distractor_ratio": null,
+      "decoy_arrow_count": -0.002208449259487433,
+      "start_end_manhattan": 0.03141204297484576,
+      "num_turns": 0.07500886830636447,
+      "path_bbox_area": 0.05544916439982287,
+      "path_coverage": 0.0918530897466343,
+      "long_dependency_score": 0.06377691037894712
+    },
+    "path_gate_mean": {
+      "path_length": -0.03473239396798586,
+      "distractor_ratio": null,
+      "decoy_arrow_count": 0.014505054193049403,
+      "start_end_manhattan": 0.006085514306672818,
+      "num_turns": -0.034496875827372916,
+      "path_bbox_area": 0.02319915320974517,
+      "path_coverage": -0.034732393967986615,
+      "long_dependency_score": 0.003106975331961012
+    },
+    "nonpath_gate_mean": {
+      "path_length": -0.08718812358880138,
+      "distractor_ratio": null,
+      "decoy_arrow_count": -0.05602283592907698,
+      "start_end_manhattan": -0.03679386566532648,
+      "num_turns": -0.062731012688608,
+      "path_bbox_area": -0.07754530841104375,
+      "path_coverage": -0.08718812358880335,
+      "long_dependency_score": -0.07411150436231415
+    },
+    "path_enrichment": {
+      "path_length": 0.037091253644349585,
+      "distractor_ratio": null,
+      "decoy_arrow_count": 0.07378034843351812,
+      "start_end_manhattan": 0.04378901128741804,
+      "num_turns": 0.013790793139132507,
+      "path_bbox_area": 0.10635910215126076,
+      "path_coverage": 0.0370912536443504,
+      "long_dependency_score": 0.07578903529384146
+    },
+    "endpoint_gate": {
+      "path_length": 0.004895048285708688,
+      "distractor_ratio": null,
+      "decoy_arrow_count": -0.008128814974291229,
+      "start_end_manhattan": 0.02235157124470666,
+      "num_turns": 0.00320258023559977,
+      "path_bbox_area": 0.01283008606689629,
+      "path_coverage": 0.004895048285708774,
+      "long_dependency_score": 0.018893637041887765
+    },
+    "decoy_gate_mean": {
+      "path_length": -0.08796264938438972,
+      "distractor_ratio": null,
+      "decoy_arrow_count": -0.055833703092105676,
+      "start_end_manhattan": -0.0373127600798503,
+      "num_turns": -0.06330861145144973,
+      "path_bbox_area": -0.07853414918691157,
+      "path_coverage": -0.08796264938439141,
+      "long_dependency_score": -0.07499430917364935
+    },
+    "black_decoy_gate_mean": {
+      "path_length": -0.10483371562985491,
+      "distractor_ratio": null,
+      "decoy_arrow_count": -0.042047867874593976,
+      "start_end_manhattan": -0.05306838268368691,
+      "num_turns": -0.07454964849343837,
+      "path_bbox_area": -0.0976072235728069,
+      "path_coverage": -0.10483371562985723,
+      "long_dependency_score": -0.09578460002766997
+    },
+    "gray_decoy_gate_mean": {
+      "path_length": -0.006059305027799881,
+      "distractor_ratio": null,
+      "decoy_arrow_count": -0.033606827187538345,
+      "start_end_manhattan": 0.014619789799810835,
+      "num_turns": -0.005102930885042431,
+      "path_bbox_area": 7.666116468070042e-05,
+      "path_coverage": -0.006059305027800024,
+      "long_dependency_score": 0.006662448867802281
+    }
+  },
+  "by_correct": [
+    {
+      "bucket": 0,
+      "n": 1043,
+      "acc": 0.0,
+      "alpha_mean": 0.3169223402742,
+      "alpha_std": 0.05005725507708233,
+      "path_enrichment_mean": -0.006786013370768722,
+      "path_enrichment_std": 0.006013137680604701,
+      "path_gate_mean_mean": 0.5005044424695754,
+      "path_gate_mean_std": 0.008370581032551307,
+      "endpoint_gate_mean": 0.5128722982061447,
+      "endpoint_gate_std": 0.026259984032172008,
+      "decoy_gate_mean_mean": 0.5071318322229439,
+      "decoy_gate_mean_std": 0.005935783624881963
+    },
+    {
+      "bucket": 1,
+      "n": 1957,
+      "acc": 1.0,
+      "alpha_mean": 0.3195948633662766,
+      "alpha_std": 0.05298130623228228,
+      "path_enrichment_mean": -0.007470955705484707,
+      "path_enrichment_std": 0.006429638300603782,
+      "path_gate_mean_mean": 0.4999192178129885,
+      "path_gate_mean_std": 0.008623157677887306,
+      "endpoint_gate_mean": 0.520747265053697,
+      "endpoint_gate_std": 0.02727804247562518,
+      "decoy_gate_mean_mean": 0.5072904145525462,
+      "decoy_gate_mean_std": 0.006385064654680663
+    }
+  ],
+  "by_path_length": [
+    {
+      "bucket": 24,
+      "n": 738,
+      "acc": 0.6775067750677507,
+      "alpha_mean": 0.31746017735017346,
+      "alpha_std": 0.053174308711773144,
+      "path_enrichment_mean": -0.007393525124491695,
+      "path_enrichment_std": 0.007223337822105552,
+      "path_gate_mean_mean": 0.5007985752562519,
+      "path_gate_mean_std": 0.009171048606933258,
+      "endpoint_gate_mean": 0.5176006272879397,
+      "endpoint_gate_std": 0.0278822635832848,
+      "decoy_gate_mean_mean": 0.5080953157825421,
+      "decoy_gate_mean_std": 0.005982800594610276
+    },
+    {
+      "bucket": 32,
+      "n": 778,
+      "acc": 0.6465295629820051,
+      "alpha_mean": 0.31813831514365265,
+      "alpha_std": 0.052424002583921575,
+      "path_enrichment_mean": -0.0076494200495793,
+      "path_enrichment_std": 0.00636727142919281,
+      "path_gate_mean_mean": 0.4998243538201512,
+      "path_gate_mean_std": 0.008276406489795149,
+      "endpoint_gate_mean": 0.518787829191029,
+      "endpoint_gate_std": 0.027032673793030596,
+      "decoy_gate_mean_mean": 0.5073629281658901,
+      "decoy_gate_mean_std": 0.0061761310032982355
+    },
+    {
+      "bucket": 40,
+      "n": 754,
+      "acc": 0.6591511936339522,
+      "alpha_mean": 0.3189621683931477,
+      "alpha_std": 0.05157908699397381,
+      "path_enrichment_mean": -0.00693086401472495,
+      "path_enrichment_std": 0.00579658366247207,
+      "path_gate_mean_mean": 0.5000614751883016,
+      "path_gate_mean_std": 0.008195506276422295,
+      "endpoint_gate_mean": 0.5170165386139872,
+      "endpoint_gate_std": 0.02675209913345316,
+      "decoy_gate_mean_mean": 0.5068636857913127,
+      "decoy_gate_mean_std": 0.006266979982209392
+    },
+    {
+      "bucket": 48,
+      "n": 730,
+      "acc": 0.626027397260274,
+      "alpha_mean": 0.32014034723174084,
+      "alpha_std": 0.05079409225590756,
+      "path_enrichment_mean": -0.006938260895609795,
+      "path_enrichment_std": 0.005655218531282156,
+      "path_gate_mean_mean": 0.49982054062002296,
+      "path_gate_mean_std": 0.008480181239299844,
+      "endpoint_gate_mean": 0.5186185487329144,
+      "endpoint_gate_std": 0.02708800014575849,
+      "decoy_gate_mean_mean": 0.5066135918364865,
+      "decoy_gate_mean_std": 0.006408300721079772
+    }
+  ]
+}

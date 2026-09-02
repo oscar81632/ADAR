@@ -1,0 +1,42 @@
+dataset_name: vstd_decoy_fullgrid_allhard
+seed: 707
+
+image:
+  size: 224
+  grid_size: 14
+  background: [248, 248, 246]
+  line_width: 3
+
+classes:
+  colors:
+    red: [220, 62, 62]
+    blue: [54, 105, 210]
+    green: [56, 155, 92]
+    yellow: [226, 178, 54]
+  shapes:
+    - circle
+    - square
+
+splits:
+  train: 10000
+  val: 2000
+  test: 3000
+
+factors:
+  path_lengths: [24, 32, 40, 48]
+  distractor_ratios: [1.0]
+
+generation:
+  min_turns: 6
+  max_attempts_per_sample: 1500
+  draw_path_trace: false
+  start_marker: cell_outline
+  distractor_shapes: false
+  distractor_black_prob: 0.5
+  decoy_paths:
+    count: 2
+    min_length: 8
+    max_length: 14
+    min_turns: 3
+    arrow_color: black
+    endpoint_shape_prob: 1.0

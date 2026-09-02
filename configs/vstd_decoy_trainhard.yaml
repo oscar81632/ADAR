@@ -1,0 +1,69 @@
+dataset_name: vstd_decoy_trainhard
+seed: 505
+
+image:
+  size: 224
+  grid_size: 14
+  background: [248, 248, 246]
+  line_width: 3
+
+classes:
+  colors:
+    red: [220, 62, 62]
+    blue: [54, 105, 210]
+    green: [56, 155, 92]
+    yellow: [226, 178, 54]
+  shapes:
+    - circle
+    - square
+
+splits:
+  train: 10000
+  val: 2000
+  test: 3000
+
+factors:
+  path_lengths: [8, 12, 16, 20]
+  distractor_ratios: [0.15, 0.25]
+
+split_factors:
+  val:
+    path_lengths: [12, 16, 20, 24]
+    distractor_ratios: [0.25, 0.4]
+  test:
+    path_lengths: [24, 32, 40, 48]
+    distractor_ratios: [0.25, 0.4]
+
+generation:
+  min_turns: 2
+  max_attempts_per_sample: 1500
+  draw_path_trace: false
+  start_marker: cell_outline
+  distractor_shapes: true
+  decoy_paths:
+    count: 1
+    min_length: 4
+    max_length: 8
+    min_turns: 2
+    arrow_color: black
+    endpoint_shape_prob: 1.0
+
+split_generation:
+  val:
+    min_turns: 4
+    decoy_paths:
+      count: 1
+      min_length: 6
+      max_length: 10
+      min_turns: 3
+      arrow_color: black
+      endpoint_shape_prob: 1.0
+  test:
+    min_turns: 6
+    decoy_paths:
+      count: 2
+      min_length: 8
+      max_length: 14
+      min_turns: 3
+      arrow_color: black
+      endpoint_shape_prob: 1.0

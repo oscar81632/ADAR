@@ -1,0 +1,34 @@
+dataset_name: vstd_tiny
+seed: 42
+
+image:
+  size: 224
+  grid_size: 14
+  background: [248, 248, 246]
+  line_width: 3
+
+classes:
+  colors:
+    red: [220, 62, 62]
+    blue: [54, 105, 210]
+    green: [56, 155, 92]
+    yellow: [226, 178, 54]
+  shapes:
+    - circle
+    - square
+
+splits:
+  train: 200
+  val: 40
+  test: 80
+
+factors:
+  path_lengths: [4, 8, 12]
+  distractor_ratios: [0.0, 0.25, 0.5]
+
+generation:
+  min_turns: 1
+  max_attempts_per_sample: 200
+  draw_path_trace: false
+  start_marker: star
+  distractor_shapes: true

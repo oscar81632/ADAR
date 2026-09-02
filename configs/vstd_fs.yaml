@@ -1,0 +1,73 @@
+dataset_name: vstd_fs
+seed: 707
+
+image:
+  size: 224
+  grid_size: 14
+  background: [248, 248, 246]
+  line_width: 3
+
+classes:
+  colors:
+    red: [220, 62, 62]
+    blue: [54, 105, 210]
+    green: [56, 155, 92]
+    yellow: [226, 178, 54]
+  shapes:
+    - circle
+    - square
+
+splits:
+  train: 8000
+  val: 1600
+  test: 2400
+
+factors:
+  path_lengths: [24, 32]
+  distractor_ratios: [0.25, 0.4]
+
+split_factors:
+  val:
+    path_lengths: [32, 40]
+    distractor_ratios: [0.25, 0.4]
+  test:
+    path_lengths: [48, 56]
+    distractor_ratios: [0.4]
+
+generation:
+  fixed_start: [0, 0]
+  min_manhattan: 12
+  min_turns: 12
+  max_attempts_per_sample: 4000
+  draw_path_trace: false
+  start_marker: cell_outline
+  distractor_shapes: true
+  decoy_paths:
+    count: 1
+    min_length: 8
+    max_length: 12
+    min_turns: 4
+    arrow_color: black
+    endpoint_shape_prob: 1.0
+
+split_generation:
+  val:
+    min_manhattan: 14
+    min_turns: 16
+    decoy_paths:
+      count: 2
+      min_length: 10
+      max_length: 14
+      min_turns: 5
+      arrow_color: black
+      endpoint_shape_prob: 1.0
+  test:
+    min_manhattan: 16
+    min_turns: 24
+    decoy_paths:
+      count: 3
+      min_length: 12
+      max_length: 18
+      min_turns: 6
+      arrow_color: black
+      endpoint_shape_prob: 1.0

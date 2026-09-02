@@ -34,6 +34,22 @@ checkpoint selection: best validation accuracy
 device: cuda
 ```
 
+The Vim baseline additionally expects the official Vim-base ImageNet-1K
+checkpoint at:
+
+```text
+checkpoints/vim-base/vim_b_midclstok_81p9acc.pth
+```
+
+Download it from https://huggingface.co/hustvl/Vim-base-midclstok:
+
+```bash
+mkdir -p checkpoints/vim-base
+curl -L \
+  -o checkpoints/vim-base/vim_b_midclstok_81p9acc.pth \
+  https://huggingface.co/hustvl/Vim-base-midclstok/resolve/main/vim_b_midclstok_81p9acc.pth
+```
+
 ## Baseline: CLIP ViT-B/16
 
 ```bash

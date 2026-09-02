@@ -136,6 +136,21 @@ The Vim baseline checkpoint used in the thesis is expected at:
 checkpoints/vim-base/vim_b_midclstok_81p9acc.pth
 ```
 
+It is not tracked in this repository because the file is large. Download the
+official Vim-base checkpoint from the upstream Hugging Face model card:
+
+- Vim-base checkpoint page: https://huggingface.co/hustvl/Vim-base-midclstok
+- Original Vim repository: https://github.com/hustvl/Vim
+
+Example download command:
+
+```bash
+mkdir -p checkpoints/vim-base
+curl -L \
+  -o checkpoints/vim-base/vim_b_midclstok_81p9acc.pth \
+  https://huggingface.co/hustvl/Vim-base-midclstok/resolve/main/vim_b_midclstok_81p9acc.pth
+```
+
 CLIP model weights are still handled by the standard CLIP download/cache
 mechanism.
 

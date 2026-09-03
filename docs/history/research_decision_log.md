@@ -1,21 +1,20 @@
-# Research Decision Log
+# Research Notes
 
 This note summarizes the main research decisions and implementation state behind
-the ADAR/VSTD thesis project. It is intended as a handoff document for future
-work, including new Codex sessions on another machine.
+the ADAR/VSTD project.
 
-## Final Thesis Direction
+## Final Research Direction
 
 The project started from an attempt to combine Vim with CLIP by replacing the
 CLIP visual encoder. That direction produced useful baselines and implementation
-experience, but the final thesis contribution shifted toward a clearer research
+experience, but the final contribution shifted toward a clearer research
 question:
 
 > Can CLIP-style vision-language models perform long-sequence visual state
 > tracking under decoy-heavy distribution shifts, and can a better ViT readout
 > improve this behavior?
 
-The final thesis should therefore be framed around:
+The final project should therefore be framed around:
 
 1. **VSTD:** a synthetic benchmark for visual state tracking.
 2. **ADAR:** an adaptive decoy-aware readout for CLIP ViT-B/16.
@@ -86,7 +85,7 @@ correct path ambiguous.
 
 ## Main Experimental Protocol
 
-All paper-facing full fine-tuning results use:
+All main full fine-tuning results use:
 
 ```text
 dataset: datasets/vstd_decoy_trainhard
@@ -195,20 +194,6 @@ checkpoints/vim-base/vim_b_midclstok_81p9acc.pth
 
 CLIP model weights are handled by the CLIP download/cache mechanism.
 
-## Thesis and Slides State
-
-Separate GitHub repositories exist:
-
-```text
-https://github.com/oscar81632/ADAR
-https://github.com/oscar81632/ADAR-Thesis
-https://github.com/oscar81632/ADAR-Thesis-Slides
-```
-
-They were created as private repositories. Keep thesis and slides private unless
-the signed pages, defense materials, and school submission files are safe to
-publish.
-
 ## External Dataset Explorations
 
 The project also explored:
@@ -220,36 +205,5 @@ The project also explored:
 - STL-10
 - SigLIP / EVA-CLIP style baselines
 
-These were exploratory and should not replace the main thesis story unless new
-results are intentionally promoted into the paper.
-
-## Resume / Portfolio Notes
-
-The resume was updated to emphasize:
-
-- ADAR/VSTD thesis research
-- CLIP/Vision-language model experience
-- long-sequence visual reasoning
-- XGBoost AML prefiltering
-- prior QA engineering experience
-
-Current local files:
-
-```text
-20251209Resume.docx
-20251209Resume_ADAR.pdf
-Resume_ADAR_Update.md
-```
-
-## New Codex Session Prompt
-
-For a new Codex session, paste:
-
-```text
-Please read README.md, docs/reproducibility/MAIN_EXPERIMENTS.md,
-docs/paper_tables/MAIN_RESULTS.md, and docs/history/research_decision_log.md.
-Continue from my ADAR/VSTD thesis research. The final thesis contribution is
-ADAR for CLIP ViT readout design, evaluated on VSTD, with Vim retained as a
-baseline/history item.
-```
-
+These were exploratory and should not replace the main project narrative unless
+new results are intentionally promoted into the paper.

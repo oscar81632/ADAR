@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import sys
 # 這裡要 import Vim 位置
-sys.path.append("<LOCAL_ROOT>/Vim1")
+sys.path.append("external/vim_vstd")
 
 # 這個 import 路徑要依你的實際 Vim repo 位置調整
 from vim.models_mamba import (

@@ -103,13 +103,14 @@ The scripts use the vendored CLIP package in this repository, but the active
 Python environment still needs the CLIP runtime dependencies such as
 `torchvision`.
 
-## Phase 5: Make the Research Claim
+## Phase 5: Historical Research Claim
 
-The target claim should be:
+This note records an earlier research direction before the final project pivoted
+to ADAR and ViT readout design. The earlier target claim was:
 
 > Vim is not universally better than ViT, but it becomes more competitive when
 > classification depends on long-range visual state tracking under increasing
-> path length and distractor density.
+> path length and decoy density.
 
 Required evidence:
 
@@ -119,7 +120,7 @@ Required evidence:
 - Similarity gap between correct prompt and strongest incorrect prompt.
 - Representation geometry before/after fine-tuning.
 
-## Immediate TODO
+## Archived Follow-Up Items
 
 - Generate `vstd_medium` and `vstd_hard` once the easy split is visually approved.
 - Train first baselines on `vstd_easy` before running large sweeps.

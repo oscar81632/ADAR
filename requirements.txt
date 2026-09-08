@@ -1,0 +1,12 @@
+torch
+torchvision
+numpy
+Pillow
+PyYAML
+tqdm
+ftfy
+regex
+scikit-learn
+pandas
+transformers
+open_clip_torch

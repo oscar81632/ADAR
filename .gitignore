@@ -9,6 +9,8 @@ notebooks/.ipynb_checkpoints/
 __pycache__/
 *.py[cod]
 *.egg-info/
+.venv/
+venv/
 
 # Large model artifacts
 *.pt

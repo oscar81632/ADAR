@@ -2,10 +2,11 @@
 
 ## Main Result Table
 
-All models use CLIP-pretrained weights and full visual fine-tuning for 6 epochs
-on `datasets/vstd_decoy_trainhard`. The table combines the vanilla Vim baseline,
-standard CLIP visual encoder baselines, and the proposed ADAR mainline under the
-same best-validation checkpoint protocol.
+All models use full visual fine-tuning for 6 epochs on
+`datasets/vstd_decoy_trainhard` under the same best-validation checkpoint
+protocol. CLIP visual encoder baselines use their corresponding CLIP-pretrained
+weights. The Vim baseline uses the official Vim-base vision checkpoint integrated
+into the same CLIP-style image-text evaluation framework.
 
 | Method | Visual Encoder | Test Acc | L=48 Acc | Note |
 |---|---|---:|---:|---|

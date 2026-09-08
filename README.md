@@ -1,61 +1,64 @@
-# ADAR Research Workspace
+# ADAR: Adaptive Decoy-Aware Readout for CLIP
 
-This workspace contains the paper-facing code, datasets, run logs, and analysis
-for **ADAR: Adaptive Decoy-Aware Readout** on the Visual State Tracking Dataset
-(VSTD). It is intended to be self-contained for reproducing the thesis
-experiments.
+This repository contains the research code for **ADAR** and the **Visual State
+Tracking Dataset (VSTD)**. The project studies whether CLIP-style
+vision-language models can follow long visual paths under heavy visual decoys,
+then improves the ViT readout stage without changing the training loss or adding
+path-level supervision.
 
-## Directory Layout
+## Highlights
+
+- **Task:** VSTD asks a model to follow a rendered path and classify the endpoint
+  from text prompts.
+- **Method:** ADAR adds a decoy-aware readout on top of CLIP ViT-B/16. It keeps
+  the CLIP-style image-text objective unchanged.
+- **Main result:** Under the same 6-epoch visual fine-tuning protocol, ADAR
+  improves CLIP ViT-B/16 from **78.60%** to **88.46%** mean test accuracy over
+  three seeds on the OOD VSTD split.
+- **Long-path result:** On the longest path group, ADAR improves mean accuracy
+  from **72.42%** to **84.78%**.
+- **Reproducibility:** The repo vendors the modified CLIP/Vim code needed by the
+  experiments, so an external CLIP source tree is not required.
+
+## Repository Layout
 
 ```text
-ADAR_Research/
-  configs/        Experiment configs and dataset generation configs.
-  datasets/       Generated datasets such as VSTD. Do not commit large images.
-  checkpoints/    Local model checkpoints needed by non-CLIP baselines.
-  docs/           Notes, repo inventory, paper planning, and experiment logs.
-  external/       Vendored CLIP/Vim code needed by the experiments.
-  figures/        Paper-ready figures copied or generated from runs.
-  notebooks/      Exploratory notebooks.
-  runs/           New training/evaluation outputs.
-  scripts/        CLI entrypoints for generation, training, and analysis.
-  src/
-    vstd/         Visual State Tracking Dataset code.
-    training/     Training adapters/wrappers for the clean experiments.
-    analysis/     Metrics, plots, and representation geometry analysis.
+configs/        VSTD generation configs and experiment settings.
+docs/           Main results, reproducibility commands, and research notes.
+external/       Repo-local CLIP and Vim code used by the experiments.
+scripts/        Dataset generation, training, evaluation, and visualization CLIs.
+src/            VSTD implementation and repo-local CLIP loader.
 ```
 
-## Self-Contained Runtime
+Generated datasets, run outputs, checkpoints, and external downloaded datasets
+are intentionally excluded from Git. They can be regenerated with the commands
+below.
 
-The paper-facing modified CLIP package is vendored inside this repo at
-`external/clip_vstd/`. The Vim model definitions needed by the Vim baseline are
-vendored at `external/vim_vstd/`.
+Some metadata/config fields retain the earlier internal key name
+`distractor_ratio`; in the paper and README, these are referred to as visual
+decoys.
 
-Training scripts import these vendored packages automatically through
-`src/adar_clip.py`, so reproducing the experiments does not require an external
-CLIP source tree.
+## Install
 
-## Recommended Workflow
-
-1. Generate datasets into `datasets/vstd_*`.
-2. Train/evaluate into `runs/<experiment_name>`.
-3. Save final plots into `figures/<experiment_name>`.
-4. Document conclusions in `docs/`.
-
-Run commands from the repo root with a Python environment that has PyTorch,
-Pillow, PyYAML, NumPy, and the CLIP runtime dependencies installed:
+Python 3.10+ is recommended. For CUDA training, install a PyTorch build that
+matches your driver and CUDA runtime.
 
 ```bash
-python scripts/<script>.py
+git clone https://github.com/oscar81632/ADAR.git
+cd ADAR
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
-## Reproducing the Main Experiments
+The first CLIP run downloads OpenAI CLIP weights through the standard CLIP cache
+mechanism.
 
-The thesis mainline uses the `vstd_decoy_trainhard` split: training samples are
-shorter and less cluttered, while validation and test samples contain longer
-paths and heavier decoys. From a fresh checkout, run the following commands from
-the repository root.
+## Quick Reproduction
 
-### 1. Generate VSTD
+All commands should be run from the repository root.
+
+### 1. Generate the Main VSTD Split
 
 ```bash
 python scripts/generate_vstd.py \
@@ -64,19 +67,10 @@ python scripts/generate_vstd.py \
   --overwrite
 ```
 
-This creates:
+This creates `datasets/vstd_decoy_trainhard/` with train, validation, and test
+images plus metadata.
 
-```text
-datasets/vstd_decoy_trainhard/
-  train/
-  val/
-  test/
-  classes.json
-  metadata.jsonl
-  dataset_config.yaml
-```
-
-### 2. Run the Main ViT Baseline
+### 2. Run the ViT-B/16 Baseline
 
 ```bash
 python scripts/train_vstd_clip_alignment.py \
@@ -101,7 +95,7 @@ python scripts/train_vstd_clip_alignment.py \
   --seed 123 --device cuda
 ```
 
-### 4. Analyze by Path Geometry
+### 4. Analyze Long-Path Behavior
 
 ```bash
 python scripts/analyze_vstd_run.py \
@@ -112,7 +106,7 @@ python scripts/analyze_vstd_run.py \
   --device cuda
 ```
 
-### 5. Generate Gate Heatmaps
+### 5. Generate ADAR Gate Heatmaps
 
 ```bash
 python scripts/visualize_vit_readout_gates.py \
@@ -124,25 +118,40 @@ python scripts/visualize_vit_readout_gates.py \
   --device cuda
 ```
 
-For the full three-seed protocol, CLIP ResNet baselines, Vim baseline, and
-ablation variants, see `docs/reproducibility/MAIN_EXPERIMENTS.md`. The
-paper-ready numbers are summarized in `docs/paper_tables/MAIN_RESULTS.md`.
+## Main Protocol
 
-## Local Checkpoints
+The paper-facing protocol uses:
 
-The Vim baseline checkpoint used in the thesis is expected at:
+```text
+dataset: datasets/vstd_decoy_trainhard
+epochs: 6
+batch_size: 16
+eval_batch_size: 64
+learning rate: 1e-5
+weight decay: 1e-4
+checkpoint selection: best validation accuracy
+seeds: 111, 123, 321
+```
+
+For the full three-seed protocol, CLIP ResNet baselines, Vim baseline,
+ablations, and exact command list, see
+[`docs/reproducibility/MAIN_EXPERIMENTS.md`](docs/reproducibility/MAIN_EXPERIMENTS.md).
+
+Paper-ready tables are summarized in
+[`docs/paper_tables/MAIN_RESULTS.md`](docs/paper_tables/MAIN_RESULTS.md).
+
+## Vim Baseline Checkpoint
+
+The Vim baseline uses the official Vim-base ImageNet-1K checkpoint. It is not
+tracked because it is a large model file.
+
+Expected path:
 
 ```text
 checkpoints/vim-base/vim_b_midclstok_81p9acc.pth
 ```
 
-It is not tracked in this repository because the file is large. Download the
-official Vim-base checkpoint from the upstream Hugging Face model card:
-
-- Vim-base checkpoint page: https://huggingface.co/hustvl/Vim-base-midclstok
-- Original Vim repository: https://github.com/hustvl/Vim
-
-Example download command:
+Download:
 
 ```bash
 mkdir -p checkpoints/vim-base
@@ -151,17 +160,12 @@ curl -L \
   https://huggingface.co/hustvl/Vim-base-midclstok/resolve/main/vim_b_midclstok_81p9acc.pth
 ```
 
-CLIP model weights are still handled by the standard CLIP download/cache
-mechanism.
+## Notes for Reviewers
 
-## Paper Mainline
-
-The current thesis mainline is **ADAR: Adaptive Decoy-Aware Readout** for CLIP
-ViT-B/16 on VSTD.
-
-Start from:
-
-- `docs/reproducibility/MAIN_EXPERIMENTS.md` for commands.
-- `docs/paper_tables/MAIN_RESULTS.md` for paper-ready result tables.
-- `docs/BASELINE_RESULTS.md` for full experiment history.
-- `docs/figures/adar_gate_examples/` for qualitative gate heatmaps.
+- The main contribution is not a new dataset alone. VSTD is used to expose a
+  long-path, decoy-heavy failure mode in CLIP-style visual readout.
+- ADAR changes the readout architecture while keeping the CLIP-style image-text
+  alignment loss unchanged.
+- The repo includes exploratory notes for transparency, but the recommended
+  entry points are the README, `docs/reproducibility/MAIN_EXPERIMENTS.md`, and
+  `docs/paper_tables/MAIN_RESULTS.md`.
